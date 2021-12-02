@@ -5,6 +5,7 @@ import database.MemberDatabase;
 import database.TicketDatabase;
 
 public class Travel {
+    //private static Travel single_instace = null;
     protected String name;
     protected TicketDatabase ticketBase;
     protected MemberDatabase memsDatabase;
@@ -16,6 +17,12 @@ public class Travel {
         this.memsDatabase = memsDatabase;
 
     }
+    /* public static Travel getInstance(){
+        if (single_instace == null){
+            single_instace = new Travel();
+        }
+        return single_instace;
+    }*/
     public String getName(){
         return this.name;
     }
