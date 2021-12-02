@@ -6,15 +6,25 @@ import database.TicketDatabase;
 
 public class Travel {
     //private static Travel single_instace = null;
-    protected String name;
+    protected String travelName;
     protected TicketDatabase ticketBase;
     protected MemberDatabase memsDatabase;
 
-    public Travel(){}
-    public Travel(String name, TicketDatabase ticketBase, MemberDatabase memsDatabase){
-        this.name = name;
+    public Travel(){
+        this.travelName = "";
+        this.ticketBase = TicketDatabase.getInstance();
+        this.memsDatabase = MemberDatabase.getInstance();
+    }
+    public void TravelmetBases(String name, TicketDatabase ticketBase, MemberDatabase memsDatabase){
+        this.travelName = name;
         this.ticketBase = ticketBase;
         this.memsDatabase = memsDatabase;
+
+    }
+    public Travel(String travelName){
+        this.travelName = travelName;
+        this.ticketBase = TicketDatabase.getInstance();
+        this.memsDatabase = MemberDatabase.getInstance();
 
     }
     /* public static Travel getInstance(){
@@ -23,8 +33,8 @@ public class Travel {
         }
         return single_instace;
     }*/
-    public String getName(){
-        return this.name;
+    public String getTravelName(){
+        return this.travelName;
     }
     public TicketDatabase getTicketDatabase(){
          return this.ticketBase;
@@ -32,5 +42,8 @@ public class Travel {
     public MemberDatabase getMemberDatabase(){
         return this.memsDatabase;
     }
+
+
+
 }
 
