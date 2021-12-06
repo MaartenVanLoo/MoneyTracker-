@@ -24,8 +24,12 @@ public class Home extends JFrame {
     }
 
     public void changeToNewMembers(){
-        this.removeAll();
-        this.add(this.newMembers);
+
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.newMembers);
+        this.revalidate();
+        this.setVisible(true);
+        this.repaint();
         System.out.println("Changed");
     }
 }

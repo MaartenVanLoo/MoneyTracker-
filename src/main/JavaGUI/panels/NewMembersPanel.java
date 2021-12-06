@@ -10,15 +10,14 @@ public class NewMembersPanel extends JPanel{
 
     public NewMembersPanel() {
         super();
-        this.nextMember = new JTextField();
+        this.nextMember = new JTextField("test");
         this.nextMember.setPreferredSize(new Dimension(300,100));
 
-        this.addMember = new JButton();
+        this.addMember = new JButton("test");
         this.addMember.setPreferredSize(new Dimension(100,50));
 
         this.members = new JList<String>();
         this.members.setAutoscrolls(true);
-
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(nextMember);
         this.add(addMember);
