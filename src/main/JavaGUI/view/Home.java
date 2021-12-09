@@ -19,6 +19,7 @@ public class Home extends JFrame {
         this.travelController = travelController;
 
         this.setSize(500,300);
+        this.setMinimumSize(new Dimension(500,300));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.newTravel = new NewTravelPanel(travelController,this);
@@ -41,6 +42,7 @@ public class Home extends JFrame {
         }
         this.revalidate();
         this.setVisible(true);
+        this.pack();
         this.repaint();
         System.out.println("Changed");
     }

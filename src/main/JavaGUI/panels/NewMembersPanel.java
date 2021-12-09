@@ -28,12 +28,17 @@ public class NewMembersPanel extends JPanel{
         this.submit = new JButton("submit");
         this.submit.setPreferredSize(new Dimension(100,50));
 
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new BoxLayout(buttons,BoxLayout.X_AXIS));
+        buttons.add(addMember);
+        buttons.add(Box.createRigidArea(new Dimension(5, 0)));
+        buttons.add(submit);
+
         this.members = new JList<String>();
         this.members.setAutoscrolls(true);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(nextMember);
-        this.add(addMember);
-        this.add(submit);
+        this.add(buttons);
         this.add(members);
 
         addCreateActionlistener();

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class AddTicketPanel extends JPanel {
     private Home home;
@@ -18,8 +19,8 @@ public class AddTicketPanel extends JPanel {
     private JLabel title = new JLabel("TICKET");
     private JLabel name = new JLabel("Name");
     private JTextField ticketName;
-    private JLabel cost = new JLabel("Total");
-    private JTextField ticketCost;
+    private JLabel cost = new JLabel("Total  €");
+    private JFormattedTextField ticketCost;
     private JPanel memberOptions = new JPanel();
     private JComboBox ticketType;
     private EventTickets selectedTicket;
@@ -31,19 +32,24 @@ public class AddTicketPanel extends JPanel {
         this.home = home;
         this.travelController=controller;
 
-        this.ticketName = new JTextField("d");
-        this.ticketCost = new JTextField("d");
+        //https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers
+        NumberFormatter numberFormatter = new NumberFormatter(NumberFormat.getInstance());
+        numberFormatter.setValueClass(Double.class); //optional, ensures you will always get a double value
+        numberFormatter.setAllowsInvalid(false); //this is the key!!
+        numberFormatter.setMinimum(0.0); //Optional
+
+        NumberFormatter currencyFormatter = new NumberFormatter(NumberFormat.getCurrencyInstance(Locale.GERMANY));
+        currencyFormatter.setAllowsInvalid(false); //this is the key!!
+        currencyFormatter.setMinimum(0.0); //Optional
+
+        this.ticketName = new JTextField("New Ticket");
+        this.ticketCost = new JFormattedTextField(numberFormatter);
 
         this.ticketType = new JComboBox(EventTickets.values());
         this.selectedTicket = (EventTickets) this.ticketType.getSelectedItem();
         this.submitTicket = new JButton("submit new Ticket");
 
-        //https://stackoverflow.com/questions/11093326/restricting-jtextfield-input-to-integers
-        NumberFormat longFormat = NumberFormat.getInstance();
-        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-        numberFormatter.setValueClass(Double.class); //optional, ensures you will always get a long value
-        numberFormatter.setAllowsInvalid(false); //this is the key!!
-        numberFormatter.setMinimum(0.0); //Optional
+
 
         ArrayList<String> members = this.travelController.getMembers();
         for (String name: members){
@@ -52,6 +58,10 @@ public class AddTicketPanel extends JPanel {
             int height = checkBox.getPreferredSize().height;
             checkBox.setSelected(true);
             checkBox.setPreferredSize(new Dimension(100,height));
+
+            JLabel currency = new JLabel("€");
+            currency.setPreferredSize(new Dimension(10,height));
+            currency.setHorizontalAlignment(JLabel.LEFT);
 
             JFormattedTextField parts = new JFormattedTextField(numberFormatter);
             parts.setPreferredSize(new Dimension(40,height));
@@ -64,6 +74,7 @@ public class AddTicketPanel extends JPanel {
 
             JPanel member = new JPanel();
             member.add(checkBox);
+            member.add(currency);
             member.add(parts);
             member.setLayout(new BoxLayout(member,BoxLayout.X_AXIS));
             memberOptions.add(member);
@@ -113,6 +124,10 @@ public class AddTicketPanel extends JPanel {
         this.setVisible(true);
     }
     void addCreateActionlistener(){
+        this.ticketCost.addActionListener(listener->{
+            NumberFormat n = NumberFormat.getCurrencyInstance(Locale.FRANCE);
+            this.ticketCost.setText(n.format(this.ticketCost.getText()));
+        });
         this.ticketType.addActionListener(listener-> {
             this.selectedTicket = (EventTickets) this.ticketType.getSelectedItem();
             if (this.travelController.isEven(this.selectedTicket)){
