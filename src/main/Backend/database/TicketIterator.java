@@ -1,12 +1,27 @@
 package database;
 
 public class TicketIterator implements DatabaseIterator{
-    private  TicketDatabase ticketDatabase;
-    public TicketIterator(TicketDatabase tDB){
+    private  TicketDatabase tDb;
+    public TicketIterator(TicketDatabase tDb){
     }
 
     @Override
-    public void getEntry() {
+    public boolean end() {
+        return false;
+    }
 
+    @Override
+    public Object first() {
+        return null;
+    }
+
+    @Override
+    public Object next() {
+        return null;
+    }
+
+    @Override
+    public Object last() {
+        return null;
     }
 }

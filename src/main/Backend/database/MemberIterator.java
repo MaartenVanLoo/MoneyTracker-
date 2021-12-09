@@ -1,13 +1,29 @@
 package database;
 
 public class MemberIterator implements DatabaseIterator {
-    private MemberDatabase memberDatabase;
+    private MemberDatabase mDb;
 
-    public MemberIterator(MemberDatabase mDB) {
+    public MemberIterator(MemberDatabase mDb) {
+    }
+
+
+    @Override
+    public boolean end() {
+        return false;
     }
 
     @Override
-    public void getEntry() {
+    public Object first() {
+        return null;
     }
 
+    @Override
+    public Object next() {
+        return null;
+    }
+
+    @Override
+    public Object last() {
+        return null;
+    }
 }
