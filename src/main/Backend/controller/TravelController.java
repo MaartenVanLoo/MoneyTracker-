@@ -3,7 +3,9 @@ package controller;
 import javax.money.MonetaryAmount;
 
 import database.DatabaseIterator;
+import factory.TicketFactory;
 import org.javamoney.moneta.Money;
+import tickets.EventTickets;
 import tickets.Ticket;
 import travel.Travel;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 public class TravelController {
     private Travel travel;
+    private TicketFactory factory = new TicketFactory();
     public TravelController(Travel travel){
         this.travel = travel;
     };
@@ -29,6 +32,7 @@ public class TravelController {
     public ArrayList<String> getMembers(){
         return this.travel.getMemberDatabase().getNames();
     }
+    public boolean isEven(EventTickets type){return factory.isEven(type);}
     public Integer addTicket(Ticket t){
         Integer ID = this.travel.getTicketDatabase().size();
         this.travel.getTicketDatabase().addEntry(ID,t);
