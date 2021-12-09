@@ -124,10 +124,6 @@ public class AddTicketPanel extends JPanel {
         this.setVisible(true);
     }
     void addCreateActionlistener(){
-        this.ticketCost.addActionListener(listener->{
-            NumberFormat n = NumberFormat.getCurrencyInstance(Locale.FRANCE);
-            this.ticketCost.setText(n.format(this.ticketCost.getText()));
-        });
         this.ticketType.addActionListener(listener-> {
             this.selectedTicket = (EventTickets) this.ticketType.getSelectedItem();
             if (this.travelController.isEven(this.selectedTicket)){
