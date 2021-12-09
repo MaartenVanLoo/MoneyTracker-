@@ -6,6 +6,7 @@ import org.javamoney.moneta.Money;
 import javax.money.MonetaryAmount;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
+import java.util.Set;
 
 public class MemberDatabase implements Database<String, MonetaryAmount>{
     private static MemberDatabase single_instace = null;
@@ -19,6 +20,9 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
             single_instace = new MemberDatabase();
         }
         return single_instace;
+    }
+    public Set getKeys(){
+        return this.db.keySet();
     }
     @Override
     public void addEntry(String k, MonetaryAmount v) {
