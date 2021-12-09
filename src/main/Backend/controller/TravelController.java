@@ -10,7 +10,7 @@ import javax.money.MonetaryAmount;
 
 public class TravelController {
     private Travel travel;
-    TravelController(Travel travel){
+    public TravelController(Travel travel){
         this.travel = travel;
     };
 

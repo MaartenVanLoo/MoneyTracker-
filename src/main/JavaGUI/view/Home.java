@@ -19,8 +19,8 @@ public class Home extends JFrame {
         this.setSize(500,300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.newTravel = new NewTravelPanel(this);
-        this.newMembers = new NewMembersPanel();
+        this.newTravel = new NewTravelPanel(travelController,this);
+        this.newMembers = new NewMembersPanel(travelController);
 
         this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
         this.add(this.newTravel);

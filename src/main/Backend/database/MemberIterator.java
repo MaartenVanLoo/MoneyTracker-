@@ -3,7 +3,7 @@ package database;
 public class MemberIterator implements DatabaseIterator {
     private MemberDatabase memberDatabase;
 
-    private MemberIterator(MemberDatabase mDB) {
+    public MemberIterator(MemberDatabase mDB) {
     }
 
     @Override

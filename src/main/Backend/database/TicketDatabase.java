@@ -50,7 +50,7 @@ public class TicketDatabase implements Database<Integer, Ticket>{
 
     @Override
     public DatabaseIterator getItterator() {
-        return new TicketItterator(this);
+        return new TicketIterator(this);
     }
 
     @Override

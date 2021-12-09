@@ -2,7 +2,7 @@ package database;
 
 public class TicketIterator implements DatabaseIterator{
     private  TicketDatabase ticketDatabase;
-    private TicketIterator(TicketDatabase tDB){
+    public TicketIterator(TicketDatabase tDB){
     }
 
     @Override
