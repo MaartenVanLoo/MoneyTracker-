@@ -23,7 +23,7 @@ public class TicketDatabase implements Database<Integer, Ticket>{
         return single_instace;
     }
     @Override
-    public void addEntry(Integer k, Ticket v) {
+    public void addEntry(Integer k,Ticket v) {
         support.firePropertyChange("AddEntry",k,v);
         this.db.add(v);
     }
@@ -41,6 +41,17 @@ public class TicketDatabase implements Database<Integer, Ticket>{
     @Override
     public void removeEntry(Integer k) {
         this.db.remove((int)k);
+    }
+
+    @Override
+    public int size() {
+        return this.db.size();
+    }
+
+    @Override
+    public DatabaseIterator getItterator() {
+        //return new TicketIterator();
+        return null;
     }
 
     @Override

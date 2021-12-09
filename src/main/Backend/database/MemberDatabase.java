@@ -3,11 +3,11 @@ package database;
 import observers.Observer;
 import org.javamoney.moneta.Money;
 
-import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import java.beans.PropertyChangeSupport;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class MemberDatabase implements Database<String, MonetaryAmount>{
     private static MemberDatabase single_instace = null;
@@ -22,10 +22,30 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
         }
         return single_instace;
     }
+    public Set getKeys(){
+        return this.db.keySet();
+    }
+    public ArrayList<String> getNames(){
+        ArrayList<String> names=new ArrayList<String>();
+        for (Object key : db.keySet()) {
+            names.add((String)key);
+        }
+        return names;
+    }
     @Override
     public void addEntry(String k, MonetaryAmount v) {
         support.firePropertyChange("AddEntry",k,v);
         this.db.put(k,v);
+    }
+
+    @Override
+    public DatabaseIterator getItterator() {
+        return new MemberIterator();
+    }
+
+    @Override
+    public int size(){
+        return this.db.size();
     }
 
     @Override
@@ -47,4 +67,8 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     public void removeObserver(Observer o) {
         support.removePropertyChangeListener(o);
     }
+
+
 }
+
+

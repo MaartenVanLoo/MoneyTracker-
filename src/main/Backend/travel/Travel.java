@@ -19,7 +19,6 @@ public class Travel {
         this.travelName = name;
         this.ticketBase = ticketBase;
         this.memsDatabase = memsDatabase;
-
     }
     public Travel(String travelName){
         this.travelName = travelName;
@@ -36,6 +35,7 @@ public class Travel {
     public String getTravelName(){
         return this.travelName;
     }
+    public void setTravelName(String name){this.travelName = name;}
     public TicketDatabase getTicketDatabase(){
          return this.ticketBase;
     }
