@@ -1,14 +1,17 @@
 package database;
 
+import java.lang.reflect.Array;
 import java.util.Set;
 
 public class MemberIterator implements DatabaseIterator {
     private MemberDatabase mDb;
     Set keys = null;
+    Array keyArray = null;
 
     public MemberIterator() {
         this.mDb = MemberDatabase.getInstance();
         this.keys = mDb.getKeys();
+        keys.toArray(String, keyArray );
 
     }
 
@@ -31,6 +34,6 @@ public class MemberIterator implements DatabaseIterator {
 
     @Override
     public Object last() {
-        return mDb;
+        return mDb.getEntry(keys<>);
     }
 }
