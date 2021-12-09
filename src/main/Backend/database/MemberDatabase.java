@@ -3,10 +3,8 @@ package database;
 import observers.Observer;
 import org.javamoney.moneta.Money;
 
-import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import java.beans.PropertyChangeSupport;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class MemberDatabase implements Database<String, MonetaryAmount>{
@@ -29,6 +27,11 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     }
 
     @Override
+    public int size(){
+        return this.db.size();
+    }
+
+    @Override
     public MonetaryAmount getEntry(String k) {
         return this.db.getOrDefault(k, Money.of(0, "EUR"));
     }
@@ -47,4 +50,6 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     public void removeObserver(Observer o) {
         support.removePropertyChangeListener(o);
     }
+
+
 }

@@ -23,9 +23,14 @@ public class TicketDatabase implements Database<Integer, Ticket>{
         return single_instace;
     }
     @Override
-    public void addEntry(Integer k, Ticket v) {
+    public void addEntry(Integer k,Ticket v) {
         support.firePropertyChange("AddEntry",k,v);
         this.db.add(v);
+    }
+
+    @Override
+    public int size() {
+        return this.db.size();
     }
 
     @Override
