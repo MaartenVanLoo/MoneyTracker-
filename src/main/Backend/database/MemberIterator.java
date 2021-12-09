@@ -1,7 +1,13 @@
 package database;
 
 public class MemberIterator implements DatabaseIterator {
-    private MemberIterator(){
+    private MemberDatabase memberDatabase;
 
+    private MemberIterator() {
     }
+
+    @Override
+    public void getEntry() {
+    }
+
 }
