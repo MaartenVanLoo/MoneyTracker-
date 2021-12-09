@@ -5,6 +5,7 @@ import org.javamoney.moneta.Money;
 
 import javax.money.MonetaryAmount;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -23,6 +24,13 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     }
     public Set getKeys(){
         return this.db.keySet();
+    }
+    public ArrayList<String> getNames(){
+        ArrayList<String> names=new ArrayList<String>();
+        for (Object key : db.keySet()) {
+            names.add((String)key);
+        }
+        return names;
     }
     @Override
     public void addEntry(String k, MonetaryAmount v) {

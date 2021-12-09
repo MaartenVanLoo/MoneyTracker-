@@ -21,6 +21,11 @@ public class TicketIterator implements DatabaseIterator{
     }
 
     @Override
+    public Object prev() {
+        return null;
+    }
+
+    @Override
     public Object last() {
         return null;
     }
