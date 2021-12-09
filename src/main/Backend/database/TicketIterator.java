@@ -7,6 +7,6 @@ public class TicketIterator implements DatabaseIterator{
 
     @Override
     public void getEntry() {
-        
+
     }
 }
