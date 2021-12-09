@@ -35,6 +35,7 @@ public class Home extends JFrame {
                 this.getContentPane().add(this.newMembers);
                 break;
             case "AddTicketPanel":
+                this.addTicketPanel = new AddTicketPanel(travelController,this);
                 this.getContentPane().add(this.addTicketPanel);
                 break;
         }

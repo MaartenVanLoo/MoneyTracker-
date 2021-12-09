@@ -8,6 +8,7 @@ import tickets.Ticket;
 import travel.Travel;
 
 import javax.money.MonetaryAmount;
+import java.util.ArrayList;
 
 public class TravelController {
     private Travel travel;
@@ -25,8 +26,8 @@ public class TravelController {
     public void removeMember(String name){
         this.travel.getMemberDatabase().removeEntry(name);
     };
-    public DatabaseIterator getMembers(){
-        return this.travel.getMemberDatabase().getItterator();
+    public ArrayList<String> getMembers(){
+        return this.travel.getMemberDatabase().getNames();
     }
     public Integer addTicket(Ticket t){
         Integer ID = this.travel.getTicketDatabase().size();

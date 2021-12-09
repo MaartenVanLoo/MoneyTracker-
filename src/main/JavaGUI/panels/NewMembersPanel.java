@@ -40,9 +40,10 @@ public class NewMembersPanel extends JPanel{
     }
     public void addCreateActionlistener(){
         this.addMember.addActionListener(listener->{
-            this.travelController.addMember(this.nextMember.getText());
+            String name = this.nextMember.getText();
+            this.travelController.addMember(name);
             this.nextMember.setText("");
-            System.out.println("New member: " + (String)this.travelController.getMembers().last());
+            System.out.println("New member: " + name);
         });
 
         this.submit.addActionListener(listener->{
