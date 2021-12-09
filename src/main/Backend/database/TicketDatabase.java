@@ -29,11 +29,6 @@ public class TicketDatabase implements Database<Integer, Ticket>{
     }
 
     @Override
-    public int size() {
-        return this.db.size();
-    }
-
-    @Override
     public Ticket getEntry(Integer k) {
        if (k >= this.db.size() ||  k < 0){
            return new Ticket();
@@ -46,6 +41,16 @@ public class TicketDatabase implements Database<Integer, Ticket>{
     @Override
     public void removeEntry(Integer k) {
         this.db.remove((int)k);
+    }
+
+    @Override
+    public int size() {
+        return this.db.size();
+    }
+
+    @Override
+    public DatabaseIterator getItterator() {
+        return new TicketItterator(this);
     }
 
     @Override

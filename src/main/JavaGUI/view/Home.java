@@ -1,5 +1,6 @@
 package view;
 
+import controller.TravelController;
 import panels.NewMembersPanel;
 import panels.NewTravelPanel;
 
@@ -9,9 +10,12 @@ import java.awt.*;
 public class Home extends JFrame {
     protected NewTravelPanel newTravel;
     protected NewMembersPanel newMembers;
+    protected TravelController travelController;
 
-    public Home() throws InterruptedException {
+    public Home(TravelController travelController) throws InterruptedException {
         super("MoneyTracker");
+        this.travelController = travelController;
+
         this.setSize(500,300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

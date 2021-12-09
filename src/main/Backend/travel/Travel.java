@@ -36,6 +36,7 @@ public class Travel {
     public String getTravelName(){
         return this.travelName;
     }
+    public void setTravelName(String name){this.travelName = name;}
     public TicketDatabase getTicketDatabase(){
          return this.ticketBase;
     }

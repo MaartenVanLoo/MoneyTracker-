@@ -27,6 +27,11 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     }
 
     @Override
+    public DatabaseIterator getItterator() {
+        return new MemberIterator(this);
+    }
+
+    @Override
     public int size(){
         return this.db.size();
     }
@@ -53,3 +58,5 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
 
 
 }
+
+

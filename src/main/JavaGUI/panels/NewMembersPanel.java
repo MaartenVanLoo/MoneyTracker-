@@ -1,5 +1,7 @@
 package panels;
 
+import controller.TravelController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,9 +9,11 @@ public class NewMembersPanel extends JPanel{
     private JTextField nextMember;
     private JButton addMember;
     private JList<String> members;
+    private TravelController travelController;
 
-    public NewMembersPanel() {
+    public NewMembersPanel(TravelController controller) {
         super();
+        this.travelController = controller;
         this.nextMember = new JTextField("test");
         this.nextMember.setPreferredSize(new Dimension(300,100));
 
