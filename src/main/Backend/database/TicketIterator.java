@@ -7,6 +7,7 @@ public class TicketIterator implements DatabaseIterator{
     private int index;
     public TicketIterator(TicketDatabase tDb){
         this.index = 0;
+        this.tDb = tDb;
     }
 
     @Override
@@ -21,10 +22,11 @@ public class TicketIterator implements DatabaseIterator{
 
     @Override
     public Object next() {
+        Object entry = tDb.getEntry(index);
         if (index != tDb.size()){
             index++;
         }
-        return tDb.getEntry(index);
+        return entry;
     }
     @Override
     public Object prev() {
