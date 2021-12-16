@@ -22,11 +22,10 @@ public class TicketIterator implements DatabaseIterator{
 
     @Override
     public Object next() {
-        Object entry = tDb.getEntry(index);
         if (index != tDb.size()){
             index++;
         }
-        return entry;
+        return tDb.getEntry(index-1);
     }
     @Override
     public Object prev() {

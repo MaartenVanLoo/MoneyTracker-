@@ -65,7 +65,7 @@ public class Travel {
 
             //Register payer paying all:
             if (this.getMemberDatabase().getEntry(payer).containsKey(payer)){
-                this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount);
+                this.getMemberDatabase().getEntry(payer).put(payer,this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount));
             }else{
                 this.getMemberDatabase().getEntry(payer).put(payer, totalAmount);
             }
@@ -75,17 +75,17 @@ public class Travel {
             for (Map.Entry<String, MonetaryAmount> entry : distributionKey.entrySet()){
                 String key = entry.getKey();
                 MonetaryAmount value = entry.getValue();
-                if (!key.equals(payer)){
-                    if (this.getMemberDatabase().getEntry(key).containsKey(payer)){
-                        this.getMemberDatabase().getEntry(key).get(payer).subtract(value);
-                    }else{
-                        this.getMemberDatabase().getEntry(key).put(payer,value.negate());
-                    }
-                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)){
-                        this.getMemberDatabase().getEntry(payer).get(key).add(value);
-                    }
-                    else{
-                        this.getMemberDatabase().getEntry(payer).put(key,value);
+
+                if (this.getMemberDatabase().getEntry(key).containsKey(payer)){
+                    this.getMemberDatabase().getEntry(key).put(payer,this.getMemberDatabase().getEntry(key).get(payer).subtract(value));
+                }else{
+                    this.getMemberDatabase().getEntry(key).put(payer,value.negate());
+                }
+                if (!key.equals(payer)) {
+                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)) {
+                        this.getMemberDatabase().getEntry(payer).put(key,this.getMemberDatabase().getEntry(payer).get(key).add(value));
+                    } else {
+                        this.getMemberDatabase().getEntry(payer).put(key, value);
                     }
                 }
             }
