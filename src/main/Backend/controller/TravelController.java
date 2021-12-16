@@ -38,6 +38,7 @@ public class TravelController {
         this.travel.getTicketDatabase().addEntry(ID,t);
         return ID;
     };
+    public Ticket makeTicket(EventTickets type){return factory.getTicket(type,"",Money.of(0, "EUR"),new ArrayList<String>(),new ArrayList<MonetaryAmount>() );}
     public void removeTicket(Integer k){
         this.travel.getTicketDatabase().removeEntry(k);
     };

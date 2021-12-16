@@ -1,10 +1,13 @@
 package panels;
 
 import controller.TravelController;
+import org.javamoney.moneta.Money;
 import tickets.EventTickets;
 import jdk.internal.util.xml.impl.Pair;
+import tickets.Ticket;
 import view.Home;
 
+import javax.money.MonetaryAmount;
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
@@ -134,6 +137,39 @@ public class AddTicketPanel extends JPanel {
             }else{
                 enablePartBoxes();
             }
+        });
+        this.submitTicket.addActionListener(listener->{
+            Ticket ticket = travelController.makeTicket(selectedTicket);
+            //get amount
+            double amount = Double.parseDouble(ticketCost.getText());
+            ticket.setTotalAmount(Money.of(amount,"EUR"));
+            System.out.println("New Ticket: " + amount);
+
+            //loop over all members to ticket
+            int memberCount = 0;
+            double TotalParts = 0;
+            for (ArrayList<Object> member:list){
+                if (((JCheckBox)(member.get(0))).isSelected()){
+                    memberCount++;
+                    TotalParts+= Double.parseDouble(((JFormattedTextField)member.get(1)).getText());
+                }
+            }
+            for (ArrayList<Object> member:list) {
+                if (((JCheckBox)(member.get(0))).isSelected()) {
+                    String name = ((JCheckBox)(member.get(0))).getText();
+                    MonetaryAmount debt;
+                    if (this.travelController.isEven(this.selectedTicket)) {
+                        //even ticket
+                       debt = Money.of(amount/(double)memberCount,"EUR");
+                    }else{
+                        double parts = Double.parseDouble(((JFormattedTextField)member.get(1)).getText());
+                        debt = Money.of(amount * parts/TotalParts,"EUR");
+                    }
+                    ticket.addDeptor(name,debt);
+                    System.out.println(String.format("Name: %8s, debt: ",name)+debt);
+                }
+            }
+
         });
     }
     void disabelePartBoxes(){
