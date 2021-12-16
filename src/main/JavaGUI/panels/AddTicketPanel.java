@@ -195,6 +195,7 @@ public class AddTicketPanel extends JPanel implements Observer {
                 return;
             }
             System.out.println("New Ticket: " + amount);
+            ticket.setPayer(payerName);
             for (ArrayList<Object> member:list) {
                 if (((JCheckBox)(member.get(0))).isSelected()) {
                     String name = ((JCheckBox)(member.get(0))).getText();

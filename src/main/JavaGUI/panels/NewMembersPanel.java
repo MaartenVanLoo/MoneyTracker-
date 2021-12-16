@@ -22,10 +22,10 @@ public class NewMembersPanel extends JPanel implements Observer {
         this.travelController = controller;
 
         this.home = (Home)home;
-        this.nextMember = new JTextField("test");
+        this.nextMember = new JTextField("Member Name");
         this.nextMember.setPreferredSize(new Dimension(300,100));
 
-        this.addMember = new JButton("test");
+        this.addMember = new JButton("Add member");
         this.addMember.setPreferredSize(new Dimension(100,50));
 
         this.submit = new JButton("submit");
