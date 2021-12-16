@@ -1,6 +1,7 @@
 package panels;
 
 import controller.TravelController;
+import observers.Observer;
 import org.javamoney.moneta.Money;
 import tickets.EventTickets;
 import jdk.internal.util.xml.impl.Pair;
@@ -11,6 +12,7 @@ import javax.money.MonetaryAmount;
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import java.util.Locale;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class AddTicketPanel extends JPanel {
+public class AddTicketPanel extends JPanel implements Observer {
     private Home home;
     private TravelController travelController;
     private JLabel title = new JLabel("TICKET");
@@ -213,6 +215,9 @@ public class AddTicketPanel extends JPanel {
             home.setPanel("ResultsPanel");
         });
     }
+
+
+
     void disabelePartBoxes(){
         //https://stackoverflow.com/questions/21387856/how-to-enable-disable-textbox-in-java-depending-on-user-input
         for (ArrayList<Object> member: list){
@@ -228,4 +233,10 @@ public class AddTicketPanel extends JPanel {
             field.setBackground(Color.white);
         }
     }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println(evt + " recieved");
+    }
+
 }
