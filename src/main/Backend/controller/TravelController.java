@@ -46,4 +46,6 @@ public class TravelController {
         return this.travel.getTicketDatabase().getItterator();
     }
 
+    public void compute(){};
+
 }

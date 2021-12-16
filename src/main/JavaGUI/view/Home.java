@@ -4,6 +4,7 @@ import controller.TravelController;
 import panels.AddTicketPanel;
 import panels.NewMembersPanel;
 import panels.NewTravelPanel;
+import panels.ResultsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class Home extends JFrame {
     protected NewMembersPanel newMembers;
     protected AddTicketPanel addTicketPanel;
     protected TravelController travelController;
+    protected ResultsPanel resultPanel;
 
     public Home(TravelController travelController) throws InterruptedException {
         super("MoneyTracker");
@@ -38,6 +40,10 @@ public class Home extends JFrame {
             case "AddTicketPanel":
                 this.addTicketPanel = new AddTicketPanel(travelController,this);
                 this.getContentPane().add(this.addTicketPanel);
+                break;
+            case "ResultsPanel":
+                this.resultPanel = new ResultsPanel(travelController,this);
+                this.getContentPane().add(this.resultPanel);
                 break;
         }
         this.revalidate();
