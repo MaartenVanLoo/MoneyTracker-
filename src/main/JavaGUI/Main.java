@@ -1,3 +1,5 @@
+import controller.TravelController;
+import travel.Travel;
 import view.Home;
 
 public class Main {
@@ -8,6 +10,8 @@ public class Main {
     public Main(){}
 
     public void run() throws InterruptedException {
-        Home home = new Home();
+        Travel travel = new Travel();
+        TravelController controller = new TravelController(travel);
+        Home home = new Home(controller);
     }
 }

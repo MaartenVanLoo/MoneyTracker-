@@ -1,5 +1,6 @@
 package panels;
 
+import controller.TravelController;
 import view.Home;
 
 import javax.swing.*;
@@ -9,8 +10,10 @@ public class NewTravelPanel extends JPanel {
     private JTextField travelName;
     private JButton createTravel;
     private Home home;
-    public NewTravelPanel(JFrame home) {
+    private TravelController travelController;
+    public NewTravelPanel(TravelController controller, JFrame home) {
         super();
+        this.travelController = controller;
         this.home = (Home)home;
         this.travelName = new JTextField("Enter travel name");
         this.travelName.setPreferredSize(new Dimension(300,100));
@@ -20,13 +23,14 @@ public class NewTravelPanel extends JPanel {
         this.add(this.travelName,BorderLayout.NORTH);
         this.add(this.createTravel,BorderLayout.SOUTH);
 
-        addCreateActionlistner();
+        addCreateActionlistener();
     }
 
-    public void addCreateActionlistner(){
-        this.createTravel.addActionListener(listner->{
-            //TODO: ADD BUTTON FUNCTIONALITY
-            this.home.changeToNewMembers();
+    public void addCreateActionlistener(){
+        this.createTravel.addActionListener(listener->{
+            this.travelController.newTravel(this.travelName.getText());
+            System.out.println("New Travel: " + this.travelController.getTravelName());
+            this.home.setPanel("NewMemberPanel");
             });
     }
 }
