@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class MemberDatabase implements Database<String, MonetaryAmount>{
+public class MemberDatabase implements Database<String, HashMap<String,MonetaryAmount>>{
     private static MemberDatabase single_instace = null;
-    private final HashMap<String, MonetaryAmount> db = new HashMap<>();
+    private final HashMap<String, HashMap<String,MonetaryAmount>> db = new HashMap<>();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     private MemberDatabase(){}
@@ -33,13 +33,17 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
         return names;
     }
     @Override
-    public void addEntry(String k, MonetaryAmount v) {
+    public void addEntry(String k, HashMap<String,MonetaryAmount> v) {
         support.firePropertyChange("AddEntry",k,v);
-        this.db.put(k,v);
+        this.db.put(k, v);
+    }
+
+    public MonetaryAmount getBalance(String name){
+        return this.db.get(name).getOrDefault(name, Money.of(0,"EUR"));
     }
 
     @Override
-    public DatabaseIterator getItterator() {
+    public DatabaseIterator getIterator() {
         return new MemberIterator();
     }
 
@@ -49,8 +53,8 @@ public class MemberDatabase implements Database<String, MonetaryAmount>{
     }
 
     @Override
-    public MonetaryAmount getEntry(String k) {
-        return this.db.getOrDefault(k, Money.of(0, "EUR"));
+    public HashMap<String,MonetaryAmount> getEntry(String k) {
+        return this.db.getOrDefault(k, new HashMap<String,MonetaryAmount>());
     }
 
     @Override

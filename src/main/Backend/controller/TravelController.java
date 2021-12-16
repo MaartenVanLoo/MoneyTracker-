@@ -10,8 +10,8 @@ import tickets.EventTickets;
 import tickets.Ticket;
 import travel.Travel;
 
-import javax.money.MonetaryAmount;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TravelController {
     private Travel travel;
@@ -25,7 +25,7 @@ public class TravelController {
     };
     public String getTravelName(){return this.travel.getTravelName();}
     public void addMember(String name){
-        this.travel.getMemberDatabase().addEntry(name,Money.of(0, "EUR"));
+        this.travel.getMemberDatabase().addEntry(name,new HashMap<String, MonetaryAmount>());
     };
     public void removeMember(String name){
         this.travel.getMemberDatabase().removeEntry(name);
@@ -44,7 +44,7 @@ public class TravelController {
         this.travel.getTicketDatabase().removeEntry(k);
     };
     public DatabaseIterator getTickets(){
-        return this.travel.getTicketDatabase().getItterator();
+        return this.travel.getTicketDatabase().getIterator();
     }
 
     public void addObserver(Observer o){
@@ -55,8 +55,15 @@ public class TravelController {
         this.travel.getMemberDatabase().removeObserver(o);
         this.travel.getTicketDatabase().removeObserver(o);
     }
-    public void compute(){};
-
+    public void compute(){
+        travel.compute();
+    };
+    public MonetaryAmount getBalance(String name){
+        return this.travel.getMemberDatabase().getBalance(name);
+    }
+    public HashMap<String,MonetaryAmount> getDebts(String name){
+        return this.travel.getMemberDatabase().getEntry(name);
+    }
 
 
 }

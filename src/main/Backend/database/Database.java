@@ -7,7 +7,7 @@ public interface Database<key,value> {
     value getEntry(key k);
     void removeEntry(key k);
     int size();
-    DatabaseIterator getItterator();
+    DatabaseIterator getIterator();
 
     void addObserver(Observer o);
     void removeObserver(Observer o);
