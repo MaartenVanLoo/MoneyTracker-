@@ -14,6 +14,7 @@ public class NewMembersPanel extends JPanel implements Observer {
     private JButton addMember;
     private JButton submit;
     private JList<String> members;
+    private DefaultListModel<String> memberList;
     private TravelController travelController;
 
     public NewMembersPanel(TravelController controller, JFrame home) {
@@ -36,7 +37,8 @@ public class NewMembersPanel extends JPanel implements Observer {
         buttons.add(Box.createRigidArea(new Dimension(5, 0)));
         buttons.add(submit);
 
-        this.members = new JList<String>();
+        this.memberList = new DefaultListModel<>();
+        this.members = new JList<>(this.memberList);
         this.members.setAutoscrolls(true);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(nextMember);
@@ -61,5 +63,6 @@ public class NewMembersPanel extends JPanel implements Observer {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println(evt + " recieved");
+        memberList.addElement((String)evt.getOldValue());
     }
 }

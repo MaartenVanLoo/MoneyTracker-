@@ -53,12 +53,15 @@ public class AddTicketPanel extends JPanel implements Observer {
 
         this.ticketName = new JTextField("New Ticket");
         this.ticketCost = new JFormattedTextField(numberFormatter);
+        this.ticketCost.setMinimumSize(new Dimension(100,0));
+        this.ticketCost.setSize(new Dimension(300,this.ticketCost.getHeight()));
 
         this.ticketType = new JComboBox(EventTickets.values());
         this.selectedTicket = (EventTickets) this.ticketType.getSelectedItem();
         this.submitTicket = new JButton("submit new Ticket");
 
         this.payer = new JComboBox(travelController.getMembers().toArray(new String[0]));
+        this.payer.setMinimumSize(new Dimension(100,this.payer.getHeight()));
         this.compute = new JButton("Compute");
 
 
@@ -113,6 +116,7 @@ public class AddTicketPanel extends JPanel implements Observer {
         JPanel p_ticketHeader = new JPanel();
         p_ticketHeader.setLayout(new BoxLayout(p_ticketHeader,BoxLayout.Y_AXIS));
         p_ticketHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
+        p_ticketHeader.setSize(1000,100);
         p_ticketHeader.add(title);
         p_ticketHeader.add(Box.createRigidArea(new Dimension(0, 5)));
         p_ticketHeader.add(p_ticketName);
