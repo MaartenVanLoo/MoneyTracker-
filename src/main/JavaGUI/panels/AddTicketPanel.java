@@ -99,6 +99,7 @@ public class AddTicketPanel extends JPanel {
         p_ticketValue.add(ticketCost);
         JPanel p_ticketHeader = new JPanel();
         p_ticketHeader.setLayout(new BoxLayout(p_ticketHeader,BoxLayout.Y_AXIS));
+        p_ticketHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
         p_ticketHeader.add(title);
         p_ticketHeader.add(Box.createRigidArea(new Dimension(0, 5)));
         p_ticketHeader.add(p_ticketName);
@@ -110,10 +111,12 @@ public class AddTicketPanel extends JPanel {
 
         JPanel p_ticketBody = new JPanel();
         p_ticketBody.setLayout(new BoxLayout(p_ticketBody,BoxLayout.Y_AXIS));
+        p_ticketBody.setAlignmentX(Component.CENTER_ALIGNMENT);
         p_ticketBody.add(scrollPaneMembers);
         p_ticketBody.add(Box.createRigidArea(new Dimension(0, 5)));
         p_ticketBody.add(submitTicket);
         p_ticketBody.add(Box.createRigidArea(new Dimension(0, 5)));
+
 
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         this.add(p_ticketHeader);
