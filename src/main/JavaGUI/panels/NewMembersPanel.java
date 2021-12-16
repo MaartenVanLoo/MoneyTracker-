@@ -1,17 +1,20 @@
 package panels;
 
 import controller.TravelController;
+import observers.Observer;
 import view.Home;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 
-public class NewMembersPanel extends JPanel{
+public class NewMembersPanel extends JPanel implements Observer {
     private Home home;
     private JTextField nextMember;
     private JButton addMember;
     private JButton submit;
     private JList<String> members;
+    private DefaultListModel<String> memberList;
     private TravelController travelController;
 
     public NewMembersPanel(TravelController controller, JFrame home) {
@@ -34,7 +37,8 @@ public class NewMembersPanel extends JPanel{
         buttons.add(Box.createRigidArea(new Dimension(5, 0)));
         buttons.add(submit);
 
-        this.members = new JList<String>();
+        this.memberList = new DefaultListModel<>();
+        this.members = new JList<>(this.memberList);
         this.members.setAutoscrolls(true);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(nextMember);
@@ -54,5 +58,11 @@ public class NewMembersPanel extends JPanel{
         this.submit.addActionListener(listener->{
             this.home.setPanel("AddTicketPanel");
         });
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println(evt + " recieved");
+        memberList.addElement((String)evt.getOldValue());
     }
 }

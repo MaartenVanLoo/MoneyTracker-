@@ -4,6 +4,7 @@ import javax.money.MonetaryAmount;
 
 import database.DatabaseIterator;
 import factory.TicketFactory;
+import observers.Observer;
 import org.javamoney.moneta.Money;
 import tickets.EventTickets;
 import tickets.Ticket;
@@ -38,11 +39,24 @@ public class TravelController {
         this.travel.getTicketDatabase().addEntry(ID,t);
         return ID;
     };
+    public Ticket makeTicket(EventTickets type){return factory.getTicket(type,"",Money.of(0, "EUR"),new ArrayList<String>(),new ArrayList<MonetaryAmount>() );}
     public void removeTicket(Integer k){
         this.travel.getTicketDatabase().removeEntry(k);
     };
     public DatabaseIterator getTickets(){
         return this.travel.getTicketDatabase().getItterator();
     }
+
+    public void addObserver(Observer o){
+        this.travel.getMemberDatabase().addObserver(o);
+        this.travel.getTicketDatabase().addObserver(o);
+    };
+    public void removeObserver(Observer o){
+        this.travel.getMemberDatabase().removeObserver(o);
+        this.travel.getTicketDatabase().removeObserver(o);
+    }
+    public void compute(){};
+
+
 
 }

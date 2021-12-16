@@ -1,12 +1,14 @@
 package panels;
 
 import controller.TravelController;
+import observers.Observer;
 import view.Home;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 
-public class NewTravelPanel extends JPanel {
+public class NewTravelPanel extends JPanel implements Observer {
     private JTextField travelName;
     private JButton createTravel;
     private Home home;
@@ -32,5 +34,10 @@ public class NewTravelPanel extends JPanel {
             System.out.println("New Travel: " + this.travelController.getTravelName());
             this.home.setPanel("NewMemberPanel");
             });
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println(evt + " recieved");
     }
 }

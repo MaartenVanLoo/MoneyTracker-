@@ -4,6 +4,7 @@ import controller.TravelController;
 import panels.AddTicketPanel;
 import panels.NewMembersPanel;
 import panels.NewTravelPanel;
+import panels.ResultsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,9 @@ public class Home extends JFrame {
     protected NewTravelPanel newTravel;
     protected NewMembersPanel newMembers;
     protected AddTicketPanel addTicketPanel;
+    protected ResultsPanel resultPanel;
     protected TravelController travelController;
+
 
     public Home(TravelController travelController) throws InterruptedException {
         super("MoneyTracker");
@@ -23,7 +26,6 @@ public class Home extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.newTravel = new NewTravelPanel(travelController,this);
-        this.newMembers = new NewMembersPanel(travelController,this);
 
         this.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
         this.add(this.newTravel);
@@ -33,11 +35,25 @@ public class Home extends JFrame {
         this.getContentPane().removeAll();
         switch (panel){
             case "NewMemberPanel":
+                this.newMembers = new NewMembersPanel(travelController,this);
                 this.getContentPane().add(this.newMembers);
+                this.travelController.removeObserver(this.newTravel);
+                this.travelController.addObserver(this.newMembers);
+                this.newTravel = null;
                 break;
             case "AddTicketPanel":
                 this.addTicketPanel = new AddTicketPanel(travelController,this);
                 this.getContentPane().add(this.addTicketPanel);
+                this.travelController.removeObserver(this.newMembers);
+                this.travelController.addObserver(this.addTicketPanel);
+                this.newMembers = null;
+                break;
+            case "ResultsPanel":
+                this.resultPanel = new ResultsPanel(travelController,this);
+                this.getContentPane().add(this.resultPanel);
+                this.travelController.removeObserver(this.addTicketPanel);
+                this.travelController.addObserver(this.resultPanel);
+                this.addTicketPanel = null;
                 break;
         }
         this.revalidate();
