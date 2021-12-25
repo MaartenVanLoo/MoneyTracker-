@@ -68,7 +68,7 @@ public class ResultsPanel extends JPanel implements Observer {
     void showResults(){
         String name = (String)this.members.getSelectedItem();
         //get balance
-        this.balance.setText(this.travelController.getBalance(name).toString());
+        this.balance.setText("Balance: " + this.travelController.getBalance(name).toString());
 
         HashMap<String, MonetaryAmount> debts = this.travelController.getDebts(name);
 
