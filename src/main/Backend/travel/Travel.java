@@ -11,6 +11,7 @@ import javax.money.MonetaryAmount;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Travel {
     //private static Travel single_instace = null;
@@ -64,32 +65,44 @@ public class Travel {
             MonetaryAmount totalAmount = ticket.getTotalAmount();
 
             //Register payer paying all:
+            /*
             if (this.getMemberDatabase().getEntry(payer).containsKey(payer)){
-                this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount);
+                this.getMemberDatabase().getEntry(payer).put(payer,this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount));
             }else{
                 this.getMemberDatabase().getEntry(payer).put(payer, totalAmount);
             }
-
+            */
             //Register all others having to pay the payer:
             HashMap<String, MonetaryAmount> distributionKey =  ticket.getDistributionKey();
             for (Map.Entry<String, MonetaryAmount> entry : distributionKey.entrySet()){
                 String key = entry.getKey();
                 MonetaryAmount value = entry.getValue();
-                if (!key.equals(payer)){
+                if (!key.equals(payer)) {
                     if (this.getMemberDatabase().getEntry(key).containsKey(payer)){
-                        this.getMemberDatabase().getEntry(key).get(payer).subtract(value);
+                        this.getMemberDatabase().getEntry(key).put(payer,this.getMemberDatabase().getEntry(key).get(payer).subtract(value));
                     }else{
                         this.getMemberDatabase().getEntry(key).put(payer,value.negate());
                     }
-                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)){
-                        this.getMemberDatabase().getEntry(payer).get(key).add(value);
-                    }
-                    else{
-                        this.getMemberDatabase().getEntry(payer).put(key,value);
+
+                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)) {
+                        this.getMemberDatabase().getEntry(payer).put(key,this.getMemberDatabase().getEntry(payer).get(key).add(value));
+                    } else {
+                        this.getMemberDatabase().getEntry(payer).put(key, value);
                     }
                 }
             }
 
+        }
+
+        //Compute balance for every member
+        for (String member: members){
+            MonetaryAmount balance = Money.of(0,"EUR");
+            HashMap<String, MonetaryAmount> debts = this.getMemberDatabase().getEntry(member);
+            for (Map.Entry<String,MonetaryAmount> entry: debts.entrySet()){
+                MonetaryAmount value = entry.getValue();
+                balance = balance.add(value);
+            }
+            this.getMemberDatabase().getEntry(member).put(member,balance);
         }
     }
 

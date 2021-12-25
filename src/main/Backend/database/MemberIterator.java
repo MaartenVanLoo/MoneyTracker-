@@ -33,7 +33,7 @@ public class MemberIterator implements DatabaseIterator {
         if (index != keys.size()){
             index++;
         }
-        return (Object)mDb.getEntry(keys.get(index));
+        return (Object)mDb.getEntry(keys.get(index-1));
     }
     @Override
     public Object prev() {
