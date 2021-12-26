@@ -23,23 +23,7 @@ public class Travel {
         this.ticketBase = TicketDatabase.getInstance();
         this.memsDatabase = MemberDatabase.getInstance();
     }
-    public void TravelmetBases(String name, TicketDatabase ticketBase, MemberDatabase memsDatabase){
-        this.travelName = name;
-        this.ticketBase = ticketBase;
-        this.memsDatabase = memsDatabase;
-    }
-    public Travel(String travelName){
-        this.travelName = travelName;
-        this.ticketBase = TicketDatabase.getInstance();
-        this.memsDatabase = MemberDatabase.getInstance();
 
-    }
-    /* public static Travel getInstance(){
-        if (single_instace == null){
-            single_instace = new Travel();
-        }
-        return single_instace;
-    }*/
     public String getTravelName(){
         return this.travelName;
     }
@@ -64,32 +48,44 @@ public class Travel {
             MonetaryAmount totalAmount = ticket.getTotalAmount();
 
             //Register payer paying all:
+            /*
             if (this.getMemberDatabase().getEntry(payer).containsKey(payer)){
-                this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount);
+                this.getMemberDatabase().getEntry(payer).put(payer,this.getMemberDatabase().getEntry(payer).get(payer).add(totalAmount));
             }else{
                 this.getMemberDatabase().getEntry(payer).put(payer, totalAmount);
             }
-
+            */
             //Register all others having to pay the payer:
             HashMap<String, MonetaryAmount> distributionKey =  ticket.getDistributionKey();
             for (Map.Entry<String, MonetaryAmount> entry : distributionKey.entrySet()){
                 String key = entry.getKey();
                 MonetaryAmount value = entry.getValue();
-                if (!key.equals(payer)){
+                if (!key.equals(payer)) {
                     if (this.getMemberDatabase().getEntry(key).containsKey(payer)){
-                        this.getMemberDatabase().getEntry(key).get(payer).subtract(value);
+                        this.getMemberDatabase().getEntry(key).put(payer,this.getMemberDatabase().getEntry(key).get(payer).subtract(value));
                     }else{
                         this.getMemberDatabase().getEntry(key).put(payer,value.negate());
                     }
-                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)){
-                        this.getMemberDatabase().getEntry(payer).get(key).add(value);
-                    }
-                    else{
-                        this.getMemberDatabase().getEntry(payer).put(key,value);
+
+                    if (this.getMemberDatabase().getEntry(payer).containsKey(key)) {
+                        this.getMemberDatabase().getEntry(payer).put(key,this.getMemberDatabase().getEntry(payer).get(key).add(value));
+                    } else {
+                        this.getMemberDatabase().getEntry(payer).put(key, value);
                     }
                 }
             }
 
+        }
+
+        //Compute balance for every member
+        for (String member: members){
+            MonetaryAmount balance = Money.of(0,"EUR");
+            HashMap<String, MonetaryAmount> debts = this.getMemberDatabase().getEntry(member);
+            for (Map.Entry<String,MonetaryAmount> entry: debts.entrySet()){
+                MonetaryAmount value = entry.getValue();
+                balance = balance.add(value);
+            }
+            this.getMemberDatabase().getEntry(member).put(member,balance);
         }
     }
 

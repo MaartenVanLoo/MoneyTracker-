@@ -39,7 +39,7 @@ public class Ticket {
         return distributionKey;
     }
 
-    public void addDeptor(String debtor, MonetaryAmount debt ) {
+    public void addDebtor(String debtor, MonetaryAmount debt ) {
         this.distributionKey.put(debtor,debt );
     }
 }

@@ -32,6 +32,7 @@ public class MemberDatabase implements Database<String, HashMap<String,MonetaryA
         }
         return names;
     }
+
     @Override
     public void addEntry(String k, HashMap<String,MonetaryAmount> v) {
         support.firePropertyChange("AddEntry",k,v);

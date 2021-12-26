@@ -1,8 +1,6 @@
 package database;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class MemberIterator implements DatabaseIterator {
     private MemberDatabase mDb;
@@ -33,7 +31,7 @@ public class MemberIterator implements DatabaseIterator {
         if (index != keys.size()){
             index++;
         }
-        return (Object)mDb.getEntry(keys.get(index));
+        return (Object)mDb.getEntry(keys.get(index-1));
     }
     @Override
     public Object prev() {

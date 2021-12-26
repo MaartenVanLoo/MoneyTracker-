@@ -1,10 +1,10 @@
-package view;
+package JavaGUI.view;
 
 import controller.TravelController;
-import panels.AddTicketPanel;
-import panels.NewMembersPanel;
-import panels.NewTravelPanel;
-import panels.ResultsPanel;
+import JavaGUI.panels.AddTicketPanel;
+import JavaGUI.panels.NewMembersPanel;
+import JavaGUI.panels.NewTravelPanel;
+import JavaGUI.panels.ResultsPanel;
 
 import javax.swing.*;
 import java.awt.*;
