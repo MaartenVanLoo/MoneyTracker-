@@ -2,7 +2,6 @@ package controller;
 
 import javax.money.MonetaryAmount;
 
-import database.DatabaseIterator;
 import factory.TicketFactory;
 import observers.Observer;
 import org.javamoney.moneta.Money;
@@ -14,55 +13,49 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TravelController {
-    private Travel travel;
+    private Travel travelObject;
     private TicketFactory factory = new TicketFactory();
     public TravelController(Travel travel){
-        this.travel = travel;
+        this.travelObject = travel;
     };
 
     public void newTravel(String name){
-        this.travel.setTravelName(name);
+        this.travelObject.setTravelName(name);
     };
-    public String getTravelName(){return this.travel.getTravelName();}
+    public String getTravelName(){return this.travelObject.getTravelName();}
     public void addMember(String name){
-        this.travel.getMemberDatabase().addEntry(name,new HashMap<String, MonetaryAmount>());
+        this.travelObject.getMemberDatabase().addEntry(name,new HashMap<String, MonetaryAmount>());
     };
     public void removeMember(String name){
-        this.travel.getMemberDatabase().removeEntry(name);
+        this.travelObject.getMemberDatabase().removeEntry(name);
     };
     public ArrayList<String> getMembers(){
-        return this.travel.getMemberDatabase().getNames();
+        return this.travelObject.getMemberDatabase().getNames();
     }
     public boolean isEven(EventTickets type){return factory.isEven(type);}
     public Integer addTicket(Ticket t){
-        Integer ID = this.travel.getTicketDatabase().size();
-        this.travel.getTicketDatabase().addEntry(ID,t);
+        Integer ID = this.travelObject.getTicketDatabase().size();
+        this.travelObject.getTicketDatabase().addEntry(ID,t);
         return ID;
     };
     public Ticket makeTicket(EventTickets type){return factory.getTicket(type,"",Money.of(0, "EUR"),new ArrayList<String>(),new ArrayList<MonetaryAmount>() );}
-    public void removeTicket(Integer k){
-        this.travel.getTicketDatabase().removeEntry(k);
-    };
-    public DatabaseIterator getTickets(){
-        return this.travel.getTicketDatabase().getIterator();
-    }
 
     public void addObserver(Observer o){
-        this.travel.getMemberDatabase().addObserver(o);
-        this.travel.getTicketDatabase().addObserver(o);
+        this.travelObject.getMemberDatabase().addObserver(o);
+        this.travelObject.getTicketDatabase().addObserver(o);
     };
     public void removeObserver(Observer o){
-        this.travel.getMemberDatabase().removeObserver(o);
-        this.travel.getTicketDatabase().removeObserver(o);
+        this.travelObject.getMemberDatabase().removeObserver(o);
+        this.travelObject.getTicketDatabase().removeObserver(o);
     }
     public void compute(){
-        travel.compute();
+        travelObject.compute();
     };
     public MonetaryAmount getBalance(String name){
-        return this.travel.getMemberDatabase().getBalance(name);
+        return this.travelObject.getMemberDatabase().getBalance(name);
     }
     public HashMap<String,MonetaryAmount> getDebts(String name){
-        return this.travel.getMemberDatabase().getEntry(name);
+        return this.travelObject.getMemberDatabase().getEntry(name);
     }
 
 

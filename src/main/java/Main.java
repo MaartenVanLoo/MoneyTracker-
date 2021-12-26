@@ -1,6 +1,6 @@
 import controller.TravelController;
 import travel.Travel;
-import view.Home;
+import JavaGUI.view.Home;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

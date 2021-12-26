@@ -1,13 +1,10 @@
 package database;
 
 import observers.Observer;
-import org.javamoney.moneta.Money;
 import tickets.Ticket;
 
-import javax.money.MonetaryAmount;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TicketDatabase implements Database<Integer, Ticket>{
     private static TicketDatabase single_instace = null;
