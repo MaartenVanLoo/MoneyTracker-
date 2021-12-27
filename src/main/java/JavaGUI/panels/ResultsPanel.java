@@ -1,8 +1,8 @@
-package panels;
+package JavaGUI.panels;
 
 import controller.TravelController;
 import observers.Observer;
-import view.Home;
+import JavaGUI.view.Home;
 
 import javax.money.MonetaryAmount;
 import javax.swing.*;

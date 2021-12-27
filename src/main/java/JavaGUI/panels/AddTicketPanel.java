@@ -1,12 +1,11 @@
-package panels;
+package JavaGUI.panels;
 
 import controller.TravelController;
 import observers.Observer;
 import org.javamoney.moneta.Money;
 import tickets.EventTickets;
-import jdk.internal.util.xml.impl.Pair;
 import tickets.Ticket;
-import view.Home;
+import JavaGUI.view.Home;
 
 import javax.money.MonetaryAmount;
 import javax.swing.*;
@@ -207,7 +206,7 @@ public class AddTicketPanel extends JPanel implements Observer {
                         double parts = Double.parseDouble(((JFormattedTextField)member.get(1)).getText());
                         debt = Money.of(amount * parts/TotalParts,"EUR");
                     }
-                    ticket.addDeptor(name,debt);
+                    ticket.addDebtor(name,debt);
                     System.out.println(String.format("Name: %8s, debt: ",name)+debt);
                 }
             }

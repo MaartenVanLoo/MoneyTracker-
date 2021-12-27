@@ -2,7 +2,6 @@ package tickets;
 
 import javax.money.MonetaryAmount;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CustomTicket extends Ticket{
     protected String name;

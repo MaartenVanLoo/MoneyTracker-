@@ -1,7 +1,5 @@
 package database;
 
-import java.util.ArrayList;
-
 public class TicketIterator implements DatabaseIterator{
     private  TicketDatabase tDb;
     private int index;

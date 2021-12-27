@@ -11,7 +11,6 @@ import javax.money.MonetaryAmount;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Travel {
     //private static Travel single_instace = null;
@@ -24,23 +23,7 @@ public class Travel {
         this.ticketBase = TicketDatabase.getInstance();
         this.memsDatabase = MemberDatabase.getInstance();
     }
-    public void TravelmetBases(String name, TicketDatabase ticketBase, MemberDatabase memsDatabase){
-        this.travelName = name;
-        this.ticketBase = ticketBase;
-        this.memsDatabase = memsDatabase;
-    }
-    public Travel(String travelName){
-        this.travelName = travelName;
-        this.ticketBase = TicketDatabase.getInstance();
-        this.memsDatabase = MemberDatabase.getInstance();
 
-    }
-    /* public static Travel getInstance(){
-        if (single_instace == null){
-            single_instace = new Travel();
-        }
-        return single_instace;
-    }*/
     public String getTravelName(){
         return this.travelName;
     }
