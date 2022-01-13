@@ -35,6 +35,6 @@ public class TicketIterator implements DatabaseIterator{
 
     @Override
     public Object last() {
-        return tDb.getEntry(tDb.size());
+        return tDb.getEntry(tDb.size()-1);
     }
 }

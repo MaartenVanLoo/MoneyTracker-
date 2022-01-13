@@ -43,6 +43,6 @@ public class MemberIterator implements DatabaseIterator {
 
     @Override
     public Object last() {
-        return (Object)mDb.getEntry(keys.get(keys.size()));
+        return (Object)mDb.getEntry(keys.get(keys.size()-1));
     }
 }

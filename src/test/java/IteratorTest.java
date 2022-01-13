@@ -53,14 +53,16 @@ public class IteratorTest {
         test_debts.add(Money.of(30,"EUR"));
         mock_MDB.addEntry("a",mock_Hash);
         Ticket testtick = new Ticket("a", EventTickets.AirplaneTicket, Money.of(10,"EUR"),test_debtors, test_debts );
-        mock_TDB.addEntry(0,testtick);
         MemberDatabase mock_mdb = MemberDatabase.getInstance();
         TicketDatabase mock_tdb = TicketDatabase.getInstance();
 
+        mock_tdb.addEntry(0,testtick);
 
         TicketIterator iteratorUnderTest = new TicketIterator(mock_tdb);
         Assert.assertEquals(testtick, iteratorUnderTest.first());
 
+        //Remove entries => if all tests are ran at the same time => single instance passes over different tests
+        mock_tdb.removeEntry(0);
     }
     @Test
     public void end() throws Exception{ // test edgecases voor de functies in ticketiterator
@@ -83,15 +85,19 @@ public class IteratorTest {
         test_debts.add(Money.of(30,"EUR"));
         mock_MDB.addEntry("a",mock_Hash);
         Ticket testtick = new Ticket("a", EventTickets.AirplaneTicket, Money.of(1,"EUR"),test_debtors, test_debts );
-        mock_TDB.addEntry(0,testtick);
         MemberDatabase mock_mdb = MemberDatabase.getInstance();
         TicketDatabase mock_tdb = TicketDatabase.getInstance();
 
+        mock_tdb.addEntry(0,testtick);
 
         TicketIterator iteratorUnderTest = new TicketIterator(mock_tdb);
-        Assert.assertTrue(iteratorUnderTest.end());
         //Assert.assertEquals(testtick, iteratorUnderTest.first());
+        Assert.assertFalse(iteratorUnderTest.end());
+        iteratorUnderTest.next(); //Go to next value=> 1 value present = last value = "end" => next shoud return True
+        Assert.assertTrue(iteratorUnderTest.end());
 
+        //Remove entries => if all tests are ran at the same time => single instance passes over different tests
+        mock_tdb.removeEntry(0);
 
     }
     @Test
@@ -116,16 +122,19 @@ public class IteratorTest {
         mock_MDB.addEntry("a",mock_Hash);
         Ticket testtick = new Ticket("a", EventTickets.AirplaneTicket, Money.of(1,"EUR"),test_debtors, test_debts );
         Ticket testtick2 = new Ticket("a", EventTickets.AirplaneTicket, Money.of(2,"EUR"),test_debtors, test_debts );
-        mock_TDB.addEntry(0,testtick);
-        mock_TDB.addEntry(1,testtick2);
+
         MemberDatabase mock_mdb = MemberDatabase.getInstance();
         TicketDatabase mock_tdb = TicketDatabase.getInstance();
 
+        mock_tdb.addEntry(0,testtick);
+        mock_tdb.addEntry(1,testtick2);
 
         TicketIterator iteratorUnderTest = new TicketIterator(mock_tdb);
-        Assert.assertEquals(testtick2, iteratorUnderTest.next());
+        Assert.assertEquals(testtick, iteratorUnderTest.next());
 
-
+        //Remove entries => if all tests are ran at the same time => single instance passes over different tests
+        mock_tdb.removeEntry(1);
+        mock_tdb.removeEntry(0);
     }
     @Test
     public void prev() throws Exception{ // test edgecases voor de functies in ticketiterator
@@ -148,16 +157,16 @@ public class IteratorTest {
         test_debts.add(Money.of(30,"EUR"));
         mock_MDB.addEntry("a",mock_Hash);
         Ticket testtick = new Ticket("a", EventTickets.AirplaneTicket, Money.of(10,"EUR"),test_debtors, test_debts );
-        mock_TDB.addEntry(0,testtick);
         MemberDatabase mock_mdb = MemberDatabase.getInstance();
         TicketDatabase mock_tdb = TicketDatabase.getInstance();
 
+        mock_tdb.addEntry(0,testtick);
 
         TicketIterator iteratorUnderTest = new TicketIterator(mock_tdb);
-        iteratorUnderTest.last();
         Assert.assertEquals(testtick, iteratorUnderTest.prev());
 
-
+        //Remove entries => if all tests are ran at the same time => single instance passes over different tests
+        mock_tdb.removeEntry(0);
     }
     @Test
     public void last() throws Exception{ // test edgecases voor de functies in ticketiterator
@@ -179,17 +188,20 @@ public class IteratorTest {
         test_debts.add(Money.of(20,"EUR"));
         test_debts.add(Money.of(30,"EUR"));
         mock_MDB.addEntry("a",mock_Hash);
-        Ticket testtick = new Ticket("a", EventTickets.AirplaneTicket, Money.of(10,"EUR"),test_debtors, test_debts );
-        Ticket testtick2 = new Ticket("a", EventTickets.AirplaneTicket, Money.of(20,"EUR"),test_debtors, test_debts );
-        mock_TDB.addEntry(0,testtick);
-        mock_TDB.addEntry(1,testtick2);
+        Ticket testtick = new Ticket("b", EventTickets.AirplaneTicket, Money.of(10,"EUR"),test_debtors, test_debts );
+        Ticket testtick2 = new Ticket("b", EventTickets.AirplaneTicket, Money.of(20,"EUR"),test_debtors, test_debts );
         MemberDatabase mock_mdb = MemberDatabase.getInstance();
         TicketDatabase mock_tdb = TicketDatabase.getInstance();
+
+        mock_tdb.addEntry(0,testtick);
+        mock_tdb.addEntry(1,testtick2);
 
 
         TicketIterator iteratorUnderTest = new TicketIterator(mock_tdb);
         Assert.assertEquals(testtick2, iteratorUnderTest.last());
 
-
+        //Remove entries => if all tests are ran at the same time => single instance passes over different tests
+        mock_tdb.removeEntry(1);
+        mock_tdb.removeEntry(0);
     }
 }
